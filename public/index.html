@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener - Shorten Your Links</title>
+    
+    <!-- Security: Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline';
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+        img-src 'self' data: https:;
+        connect-src 'self';
+        frame-ancestors 'none';
+        base-uri 'self';
+        form-action 'self';
+    ">
+    
+    <!-- Security: Additional security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-link"></i>
+                <span>URL Shortener</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#analytics" class="nav-link">Analytics</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Short links, big results</h1>
+                <p class="hero-subtitle">Create short links instantly with analytics tracking. When you get the link right, you get everything right.</p>
+                
+                <!-- URL Shortener Form -->
+                <div class="url-form-container">
+                    <form id="urlForm" class="url-form">
+                        <div class="input-group">
+                            <input type="url" id="originalUrl" placeholder="Paste your long URL here..." required>
+                            <button type="submit" class="btn btn-primary">
+                                <span>Shorten</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Result Display -->
+                    <div id="resultContainer" class="result-container" style="display: none;">
+                        <div class="result-item">
+                            <div class="result-info">
+                                <div class="result-label">Your shortened URL:</div>
+                                <div class="result-url" id="shortUrl"></div>
+                            </div>
+                            <div class="result-actions">
+                                <button class="btn btn-copy" id="copyBtn">
+                                    <i class="fas fa-copy"></i>
+                                    Copy
+                                </button>
+                                <button class="btn btn-test" id="testBtn">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Redirect
+                                </button>
+                                <button class="btn btn-secondary" id="newUrlBtn">
+                                    <i class="fas fa-plus"></i>
+                                    New URL
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Preview -->
+                <div class="features-preview">
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Reliable</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Instant Results</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why choose our URL shortener?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Create and manage your short links in seconds with our optimized platform.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Basic Analytics</h3>
+                    <p>Track click counts and view your recent links with simple statistics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure</h3>
+                    <p>Basic security measures with input validation and XSS protection for safe URL shortening.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Optimized</h3>
+                    <p>Perfect experience across all devices with our responsive design.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section id="analytics" class="analytics">
+        <div class="container">
+            <h2 class="section-title">Link Analytics</h2>
+            <div class="analytics-container">
+                <div class="analytics-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalClicks">0</div>
+                        <div class="stat-label">Total Clicks</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalLinks">0</div>
+                        <div class="stat-label">Links Created</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="activeLinks">0</div>
+                        <div class="stat-label">Active Links</div>
+                    </div>
+                </div>
+                
+                <!-- Recent Links -->
+                <div class="recent-links">
+                    <h3>Recent Links</h3>
+                    <div id="recentLinksList" class="links-list">
+                        <div class="empty-state">
+                            <i class="fas fa-link"></i>
+                            <p>No links created yet. Create your first short link above!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i class="fas fa-link"></i>
+                    <span>URL Shortener</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Support</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 URL Shortener. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Shortening your URL...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
