@@ -1,9 +1,6 @@
 # URL Shortener
 
 <div align="center">
-
-<img src="public/favicon.ico" width="64" alt="Logo" />
-
 <p>
 <a href="#"><img alt="Node" src="https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white"></a>
 <a href="#"><img alt="Express" src="https://img.shields.io/badge/Express.js-5.x-000000?logo=express&logoColor=white"></a>
